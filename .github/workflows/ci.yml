@@ -54,8 +54,7 @@ jobs:
       - name: Configure Maven for GitHub Packages
         run: |
           mkdir -p ~/.m2
-          cat <<EOF > ~/.m2/settings.xml
-<settings>
+          echo "<settings>
   <servers>
     <server>
       <id>github</id>
@@ -63,8 +62,7 @@ jobs:
       <password>${{ secrets.TOKEN_SECRET }}</password>
     </server>
   </servers>
-</settings>
-EOF
+</settings>" > ~/.m2/settings.xml
 
       - name: Upload JAR to GitHub Packages
         run: mvn deploy -DskipTests
